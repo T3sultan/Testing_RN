@@ -14,7 +14,9 @@ import { getMovieById, getPoster, getVideo } from '../services/MovieService';
 // import { useEffect } from 'react';
 // import { useState } from 'react';
 import { APPEND_TO_RESPONSE as AR } from "../constants/Url";
-import { Ionicons, Entypo } from '@expo/vector-icons';
+import { Ionicons, Entypo, Feather, AntDesign } from '@expo/vector-icons';
+
+
 
 const { height, width } = Dimensions.get("window");
 
@@ -61,7 +63,14 @@ const MovieScreen = ({ route, navigation }) => {
                               <Ionicons name="play-circle-outline" size={45} color="white" />
                         </TouchableOpacity>
                   </View>
-                  <Text>{movie.title}</Text>
+                  <View style={styles.titleBookMark}>
+                        <Text style={styles.movieTitle} numberOfLines={2}>{movie.title}</Text>
+                        <Feather style={styles.movieTitle} name="bookmark" size={24} color="black" />
+                  </View>
+                  <View style={styles.starText}>
+                        <AntDesign name="star" size={12} color={Colors.yellow} />
+                        <Text style={styles.textStyleRating}>{movie.vote_average}/10 IMDb</Text>
+                  </View>
             </ScrollView>
       );
 };
@@ -71,18 +80,7 @@ const styles = StyleSheet.create({
             justifyContent: "center",
             alignItems: "center"
       },
-      posterMovieStyle: {
-            // height: setHeight(35),
-            // width: setWidth(145),
-            // alignItems: "center",
-            // position: "absolute",
-            // left: setWidth((100 - 145) / 2),
-            // top: 0,
-            // borderBottomRightRadius: 300,
-            // borderBottomLeftRadius: 300,
-            // elevation: 8,
 
-      },
       moviePosterImageStyle: {
 
             width: setWidth(145),
@@ -108,7 +106,40 @@ const styles = StyleSheet.create({
             elevation: 10,
 
 
+      },
+      titleBookMark: {
+            backgroundColor: "white",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            paddingHorizontal: 24,
+            marginTop: -15,
+            borderTopStartRadius: 20,
+            borderTopRightRadius: 20,
+            height: 60,
+
+      },
+      movieTitle: {
+            fontSize: 20,
+            color: "#000",
+            fontWeight: "bold",
+            marginTop: 20,
+            paddingVertical: 2,
+            
+      },
+      starText: {
+            flexDirection: "row",
+            alignItems: "center",
+            paddingHorizontal: 24,
+            backgroundColor:"white"
+
+
+      },
+      textStyleRating: {
+            fontSize: 12,
+            margin: 2,
+            color: "#9C9C9C",
       }
+
 
 
 })
