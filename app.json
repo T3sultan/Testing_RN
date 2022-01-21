@@ -2,6 +2,8 @@
   "expo": {
     "name": "Testing",
     "slug": "Testing",
+    "privacy": "public",
+    "description": "This app is task ",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
