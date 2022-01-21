@@ -6,7 +6,8 @@ import {
       StyleSheet,
       Image,
       Dimensions,
-      Linking
+      Linking,
+      FlatList
 } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Colors from '../constants/Colors';
@@ -15,7 +16,8 @@ import { getLanguage, getMovieById, getPoster, getVideo } from '../services/Movi
 // import { useState } from 'react';
 import { APPEND_TO_RESPONSE as AR } from "../constants/Url";
 import { Ionicons, Entypo, Feather, AntDesign } from '@expo/vector-icons';
-import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
+import ItemSeparator from '../components/ItemSeparator';
+import CastCard from '../components/CastCard';
 
 
 
@@ -27,6 +29,8 @@ const setWidth = (w) => (width / 100) * w;
 const MovieScreen = ({ route, navigation }) => {
       const { movieId } = route.params;
       const [movie, setMovie] = useState({})
+      const [isCastSelected, setIsCastSelected] = useState(true);
+
 
       useEffect(() => {
             getMovieById(
@@ -90,7 +94,7 @@ const MovieScreen = ({ route, navigation }) => {
                   <View style={styles.runTimeLanguageRating}>
                         <View>
                               <Text style={styles.textFormat}>Length</Text>
-                              <Text style={styles.timeDuration}>{movie?.runtime}</Text>
+                              <Text style={styles.timeDuration}>{movie?.runtime} Min</Text>
                         </View>
                         <View>
                               <Text style={styles.textFormat}>Language</Text>
@@ -104,6 +108,35 @@ const MovieScreen = ({ route, navigation }) => {
                   <View style={styles.headerContainer}>
                         <Text style={styles.headerTextStyle}>Description</Text>
                         <Text style={styles.overView}>{movie?.overview}</Text>
+                  </View>
+
+                  <View style={styles.headerContainer1}>
+                        <View>
+                              <Text style={styles.headerTextStyle}>Cast</Text>
+                        </View>
+
+                        <TouchableOpacity style={styles.seeMoreStyle}>
+                              <Text style={styles.textStyleSee}>See more</Text>
+                        </TouchableOpacity>
+
+                  </View>
+                  <View>
+                        <FlatList
+                              style={{ marginVertical: 5 }}
+                              data={isCastSelected ? movie?.credits?.cast : movie?.credits?.crew}
+                              keyExtractor={(item) => item?.credit_id}
+                              horizontal
+                              showsHorizontalScrollIndicator={false}
+                              ListHeaderComponent={() => <ItemSeparator width={20} />}
+                              ItemSeparatorComponent={() => <ItemSeparator width={20} />}
+                              ListFooterComponent={() => <ItemSeparator width={20} />}
+                              renderItem={({ item }) => (
+                                    <CastCard
+                                          originalName={item?.name}
+                                          image={item?.profile_path}
+                                    />
+                              )}
+                        />
                   </View>
 
             </ScrollView>
@@ -220,7 +253,7 @@ const styles = StyleSheet.create({
             paddingHorizontal: 20,
             backgroundColor: "white",
             marginVertical: 20,
-           
+
       },
       textFormat: {
             color: "#9C9C9C",
@@ -235,20 +268,41 @@ const styles = StyleSheet.create({
             fontSize: 16,
             fontWeight: 'bold',
             letterSpacing: 0.02,
-            marginTop:10
-            
+            marginTop: 10
+
       },
-      headerContainer: {   
+      headerContainer: {
             paddingHorizontal: 20,
             paddingVertical: 10,
-          
-      },
-      overView:{
-            color: '#9C9C9C',
-            fontSize:12,
-            marginTop:8
-      }
 
+      },
+      overView: {
+            color: '#9C9C9C',
+            fontSize: 12,
+            marginTop: 8
+      },
+      headerContainer1: {
+            flexDirection: 'row',
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingHorizontal: 20,
+            paddingVertical: 10
+      },
+
+      seeMoreStyle: {
+            backgroundColor: "white",
+            width: 50,
+            height: 17,
+            borderRadius: 5,
+            borderColor: "#AAA9B1",
+            borderWidth: 1,
+
+      },
+      textStyleSee: {
+            color: "#AAA9B1",
+            fontSize: 10,
+            lineHeight: 14,
+      },
 
 })
 

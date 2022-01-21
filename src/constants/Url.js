@@ -19,7 +19,7 @@ const ENDPOINTS = {
 
     const APPEND_TO_RESPONSE = {
       VIDEOS: "videos",
-      // CREDITS: "credits",
+      CREDITS: "credits",
       // RECOMMENDATIONS: "recommendations",
       // SIMILAR: "similar",
     };
