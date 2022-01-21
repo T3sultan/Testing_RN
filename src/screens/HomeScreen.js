@@ -1,9 +1,26 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, View, Text, ScrollView, Button } from 'react-native';
+import React, { useState, useEffect } from "react";
+
+import {
+      StyleSheet,
+      View,
+      Text,
+      ScrollView,
+      Button,
+      TouchableOpacity,
+      FlatList
+} from 'react-native';
 import Colors from '../constants/Colors';
+import MovieCardItem from '../components/MovieCardItem';
+import ItemSeparator from '../components/ItemSeparator';
+import GenreCard from '../components/GenreCard';
+
+const Genres = ["All", "Action", "Comedy", "Romance", "Horror", "Sci-Fi"];
 
 const HomeScreen = () => {
+      const [activeGenre, setActiveGenre] = useState("All");
+
+
       return (
             <ScrollView style={styles.container}>
                   <StatusBar
@@ -16,17 +33,43 @@ const HomeScreen = () => {
                         <View>
                               <Text style={styles.headerTextStyle}>Now Showing</Text>
                         </View>
-                        <View style={styles.buttonContainer}>
-                              <Button
-                                    style={styles.buttonText}
-                                    title='See more'
-                                    borderRadius='30px'
 
-
-                              />
-                        </View>
+                        <TouchableOpacity style={styles.seeMoreStyle}>
+                              <Text style={styles.textStyleSee}>See more</Text>
+                        </TouchableOpacity>
 
                   </View>
+                  {/* <View style={styles.genreListContainer}>
+                        <FlatList
+                              data={Genres}
+                              horizontal
+                              showsHorizontalScrollIndicator={false}
+                              keyExtractor={(item) => item}
+                              ItemSeparatorComponent={() => <ItemSeparator width={20} />}
+                              ListHeaderComponent={() => <ItemSeparator width={20} />}
+                              ListFooterComponent={() => <ItemSeparator width={20} />}
+                              renderItem={({ item }) => <GenreCard
+                                    genreName={item}
+                                    active={item === activeGenre ? true : false}
+                                    onPress={setActiveGenre}
+
+                              />}
+                        />
+                  </View> */}
+
+                  <View style={styles.genreListContainer}>
+                        <FlatList
+                              data={Genres}
+                              horizontal
+                              showsHorizontalScrollIndicator={false}
+                              keyExtractor={(item) => item}
+                              renderItem={({ item }) => <MovieCardItem />}
+
+
+                        />
+                  </View>
+
+
             </ScrollView>
       );
 };
@@ -36,17 +79,7 @@ const styles = StyleSheet.create({
             backgroundColor: Colors.white_background
 
       },
-      buttonContainer: {
-            width: 45,
-            height: 20,
-            backgroundColor: "white",
-            // borderRadius: 10,
 
-      },
-      buttonText: {
-
-
-      },
       headerContainer: {
             flexDirection: 'row',
             justifyContent: "space-between",
@@ -59,6 +92,25 @@ const styles = StyleSheet.create({
             fontSize: 16,
             fontWeight: 'bold',
             letterSpacing: 0.02,
+      },
+      seeMoreStyle: {
+            backgroundColor: "white",
+            width: 50,
+            height: 17,
+            borderRadius: 5,
+            borderColor: "#AAA9B1",
+            borderWidth: 1,
+
+      },
+      textStyleSee: {
+            color: "#AAA9B1",
+            fontSize: 10,
+            lineHeight: 14,
+      },
+      genreListContainer: {
+            paddingVertical: 10,
+            // paddingHorizontal: 20,
+            padding: 10
       }
 })
 
