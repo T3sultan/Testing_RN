@@ -11,12 +11,25 @@ import {
       FlatList
 } from 'react-native';
 import Colors from '../constants/Colors';
+import ItemSeparator from '../components/ItemSeparator';
+import GenreCard from '../components/GenreCard';
+import MovieCardItem from '../components/MovieCardItem';
+import { getNowPlayingMovies } from '../services/MovieService';
 
 
-const Genres = ["All", "Action", "Comedy", "Romance", "Horror", "Sci-Fi"];
+const genres = ["All", "Action", "Comedy", "Romance", "Horror", "Sci-Fi"];
 
 const HomeScreen = () => {
       const [activeGenre, setActiveGenre] = useState("All");
+      const [nowPlayingMovies, setNowPlayingMovies] = useState({});
+
+      useEffect(() => {
+            getNowPlayingMovies().then((movieResponse) =>
+                  setNowPlayingMovies(movieResponse.data)
+            );
+
+      }, []);
+
 
 
 
@@ -49,6 +62,30 @@ const HomeScreen = () => {
                               <Text style={styles.textStyleSee}>See more</Text>
                         </TouchableOpacity>
 
+                  </View>
+
+                  <View>
+                        <FlatList
+                              data={nowPlayingMovies.results}
+                              horizontal
+                              showsHorizontalScrollIndicator={false}
+                              keyExtractor={(item) => item.id.toString()}
+                              ItemSeparatorComponent={() => <ItemSeparator width={20} />}
+                              ListHeaderComponent={() => <ItemSeparator width={20} />}
+                              ListFooterComponent={() => <ItemSeparator width={20} />}
+                              renderItem={({ item }) => (
+                                    <MovieCardItem
+                                          title={item.title}
+                                          language={item.original_language}
+                                          voteAverage={item.vote_average}
+                                          voteCount={item.vote_count}
+                                          poster={item.poster_path}
+                                          heartLess={false}
+                                          onPress={() => navigation.navigate("movie", { movieId: item.id })}
+
+                                    />
+                              )}
+                        />
                   </View>
 
 

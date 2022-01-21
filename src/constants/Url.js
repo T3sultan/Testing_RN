@@ -1,7 +1,7 @@
 const TMDB_BASE_URL = "https://api.themoviedb.org/3";
 const TMDB_IMAGE_BASE_URL = "https://image.tmdb.org/t/p";
 
-const TMDB_API_KEY = "---";
+const TMDB_API_KEY = 'bdb88397a84e36d072c6363aa30b12e4';
 
 
 const ENDPOINTS = {

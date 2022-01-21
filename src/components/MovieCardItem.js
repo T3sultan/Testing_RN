@@ -1,19 +1,40 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import {
+      StyleSheet,
+      View,
+      Text,
+      TouchableOpacity,
+      ImageBackground
+} from 'react-native';
 import Colors from '../constants/Colors';
 import { AntDesign } from '@expo/vector-icons';
+import { getPoster } from '../services/MovieService';
 
-const MovieCardItem = ({title}) => {
+const MovieCardItem = ({
+      title,
+      poster,
+      voteAverage,
+      onPress
+
+}) => {
       return (
             <TouchableOpacity style={styles.mainContainer}>
-                  <Text style={styles.container}>{title}</Text>
+                  <ImageBackground
+                        style={{ ...styles.container, width: 143, height: 212}}
+                        imageStyle={{ borderRadius: 12 }}
+                        source={{ uri: getPoster(poster) }}
+                  >
+
+
+                  </ImageBackground>
+
+
                   <View style={styles.twoContainer}>
-                        <Text style={styles.movieTitle} numberOfLines={3}>using React Native and Expo 
-                        </Text>
+                        <Text style={styles.movieTitle} numberOfLines={3}>{title}</Text>
                         <View style={styles.starText}>
 
                               <AntDesign name="star" size={12} color={Colors.yellow} />
-                              <Text style={styles.textStyleRating}>rating 9/10</Text>
+                              <Text style={styles.textStyleRating}>{voteAverage}/10 IMDb</Text>
                         </View>
 
                   </View>
@@ -28,7 +49,7 @@ const styles = StyleSheet.create({
             width: 143,
             height: 212,
             backgroundColor: Colors.active,
-            elevation: 5,
+            elevation: 3,
             marginVertical: 2,
 
 
@@ -36,13 +57,10 @@ const styles = StyleSheet.create({
       },
       twoContainer: {
             justifyContent: "center",
-
-
-
       },
       mainContainer: {
-            paddingVertical: 4,
-            paddingHorizontal: 8
+            paddingVertical: 2,
+            paddingHorizontal: 2
       },
       starText: {
             flexDirection: "row",
@@ -51,9 +69,18 @@ const styles = StyleSheet.create({
       },
       textStyleRating: {
             fontSize: 12,
-            margin: 2
-      }
+            margin: 2,
+            color: "#9C9C9C",
+      },
 
+      movieTitle:{
+            paddingVertical:2,
+            marginTop:5,
+            width: 143,
+            fontSize:14,
+            color:Colors.black,
+            fontWeight:'bold'
+      }
 })
 
 export default MovieCardItem;

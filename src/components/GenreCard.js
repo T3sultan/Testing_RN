@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, View, Text, Dimensions, TouchableOpacity } from 'react-native';
-import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 import Colors from '../constants/Colors';
 const { width } = Dimensions.get("screen");
 
