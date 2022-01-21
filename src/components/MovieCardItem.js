@@ -3,10 +3,10 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import Colors from '../constants/Colors';
 import { AntDesign } from '@expo/vector-icons';
 
-const MovieCardItem = () => {
+const MovieCardItem = ({title}) => {
       return (
             <TouchableOpacity style={styles.mainContainer}>
-                  <Text style={styles.container}>URI - Surgerl Strik</Text>
+                  <Text style={styles.container}>{title}</Text>
                   <View style={styles.twoContainer}>
                         <Text style={styles.movieTitle} numberOfLines={3}>using React Native and Expo 
                         </Text>
@@ -52,9 +52,6 @@ const styles = StyleSheet.create({
       textStyleRating: {
             fontSize: 12,
             margin: 2
-      },
-      movieTitle:{
-            width: 140,
       }
 
 })

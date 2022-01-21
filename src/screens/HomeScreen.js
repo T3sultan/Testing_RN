@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from "react";
-
+import { Ionicons } from '@expo/vector-icons';
 import {
       StyleSheet,
       View,
@@ -11,14 +11,13 @@ import {
       FlatList
 } from 'react-native';
 import Colors from '../constants/Colors';
-import MovieCardItem from '../components/MovieCardItem';
-import ItemSeparator from '../components/ItemSeparator';
-import GenreCard from '../components/GenreCard';
+
 
 const Genres = ["All", "Action", "Comedy", "Romance", "Horror", "Sci-Fi"];
 
 const HomeScreen = () => {
       const [activeGenre, setActiveGenre] = useState("All");
+
 
 
       return (
@@ -29,6 +28,18 @@ const HomeScreen = () => {
                         backgroundColor={Colors.white_background}
 
                   />
+                  <View style={styles.mainRootHeader}>
+                        <View>
+                              <Ionicons name="menu" size={16} color="black" />
+                        </View>
+                        <View>
+                              <Text style={styles.headerTextStyle}>FilmKu</Text>
+                        </View>
+                        <View>
+                              <Ionicons name="notifications-outline" size={16} color="black" />
+                        </View>
+
+                  </View>
                   <View style={styles.headerContainer}>
                         <View>
                               <Text style={styles.headerTextStyle}>Now Showing</Text>
@@ -39,35 +50,9 @@ const HomeScreen = () => {
                         </TouchableOpacity>
 
                   </View>
-                  {/* <View style={styles.genreListContainer}>
-                        <FlatList
-                              data={Genres}
-                              horizontal
-                              showsHorizontalScrollIndicator={false}
-                              keyExtractor={(item) => item}
-                              ItemSeparatorComponent={() => <ItemSeparator width={20} />}
-                              ListHeaderComponent={() => <ItemSeparator width={20} />}
-                              ListFooterComponent={() => <ItemSeparator width={20} />}
-                              renderItem={({ item }) => <GenreCard
-                                    genreName={item}
-                                    active={item === activeGenre ? true : false}
-                                    onPress={setActiveGenre}
-
-                              />}
-                        />
-                  </View> */}
-
-                  <View style={styles.genreListContainer}>
-                        <FlatList
-                              data={Genres}
-                              horizontal
-                              showsHorizontalScrollIndicator={false}
-                              keyExtractor={(item) => item}
-                              renderItem={({ item }) => <MovieCardItem />}
 
 
-                        />
-                  </View>
+
 
 
             </ScrollView>
@@ -111,6 +96,13 @@ const styles = StyleSheet.create({
             paddingVertical: 10,
             // paddingHorizontal: 20,
             padding: 10
+      },
+      mainRootHeader: {
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+            paddingHorizontal: 20,
+            paddingVertical: 10
       }
 })
 
