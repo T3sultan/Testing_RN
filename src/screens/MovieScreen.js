@@ -10,11 +10,12 @@ import {
 } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Colors from '../constants/Colors';
-import { getMovieById, getPoster, getVideo } from '../services/MovieService';
+import { getLanguage, getMovieById, getPoster, getVideo } from '../services/MovieService';
 // import { useEffect } from 'react';
 // import { useState } from 'react';
 import { APPEND_TO_RESPONSE as AR } from "../constants/Url";
 import { Ionicons, Entypo, Feather, AntDesign } from '@expo/vector-icons';
+import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
 
 
@@ -35,7 +36,7 @@ const MovieScreen = ({ route, navigation }) => {
       }, []);
 
       return (
-            <ScrollView>
+            <ScrollView style={{ backgroundColor: "white" }}>
                   <StatusBar
                         style='auto'
 
@@ -71,6 +72,40 @@ const MovieScreen = ({ route, navigation }) => {
                         <AntDesign name="star" size={12} color={Colors.yellow} />
                         <Text style={styles.textStyleRating}>{movie.vote_average}/10 IMDb</Text>
                   </View>
+                  {/* <View style={styles.genreTextStyleSet}>
+                        <TouchableOpacity style={styles.genreText}>
+                              <Text style={styles.textStyling}>{movie?.genres?.map((genre) => genre?.name)?.join("  ")}</Text>
+
+                        </TouchableOpacity>
+
+                  </View> */}
+                  <View style={styles.genre}>
+                        <TouchableOpacity style={styles.genre1}>
+                              <Text style={styles.textStyling}>{movie?.genres?.map((genre) => genre?.name)?.join(" ")}</Text>
+
+                        </TouchableOpacity>
+
+
+                  </View>
+                  <View style={styles.runTimeLanguageRating}>
+                        <View>
+                              <Text style={styles.textFormat}>Length</Text>
+                              <Text style={styles.timeDuration}>{movie?.runtime}</Text>
+                        </View>
+                        <View>
+                              <Text style={styles.textFormat}>Language</Text>
+                              <Text> {getLanguage(movie?.original_language)?.english_name}</Text>
+                        </View>
+                        <View>
+                              <Text style={styles.textFormat}>Rating</Text>
+                              <Text>{movie?.vote_average}</Text>
+                        </View>
+                  </View>
+                  <View style={styles.headerContainer}>
+                        <Text style={styles.headerTextStyle}>Description</Text>
+                        <Text style={styles.overView}>{movie?.overview}</Text>
+                  </View>
+
             </ScrollView>
       );
 };
@@ -124,13 +159,13 @@ const styles = StyleSheet.create({
             fontWeight: "bold",
             marginTop: 20,
             paddingVertical: 2,
-            
+
       },
       starText: {
             flexDirection: "row",
             alignItems: "center",
             paddingHorizontal: 24,
-            backgroundColor:"white"
+            backgroundColor: "white"
 
 
       },
@@ -138,8 +173,81 @@ const styles = StyleSheet.create({
             fontSize: 12,
             margin: 2,
             color: "#9C9C9C",
-      }
+      },
+      genreText: {
+            color: Colors.gray,
+            paddingHorizontal: 20,
+            paddingTop: 5,
+            fontSize: 13,
+            backgroundColor: "white"
+      },
+      genreTextStyleSet: {
+            backgroundColor: "white",
+            paddingHorizontal: 10,
+            borderRadius: 10,
 
+
+
+      },
+      genre: {
+            flexDirection: "row",
+            backgroundColor: 'white',
+            paddingHorizontal: 20,
+            paddingTop: 10,
+            justifyContent: "space-between"
+
+
+
+
+      },
+      textStyling: {
+            borderRadius: 5,
+            borderColor: "#000",
+            fontSize: 8,
+            marginLeft: 5,
+            backgroundColor: '#88A4E8'
+
+      },
+      genre1: {
+            backgroundColor: '#88A4E8',
+            borderRadius: 3,
+            marginLeft: 5
+
+      },
+      runTimeLanguageRating: {
+            flexDirection: "row",
+            justifyContent: "space-between",
+            paddingHorizontal: 20,
+            backgroundColor: "white",
+            marginVertical: 20,
+           
+      },
+      textFormat: {
+            color: "#9C9C9C",
+            fontSize: 12
+      },
+      timeDuration: {
+            fontSize: 12,
+            color: "#000"
+      },
+      headerTextStyle: {
+            color: '#110E47',
+            fontSize: 16,
+            fontWeight: 'bold',
+            letterSpacing: 0.02,
+            marginTop:10
+            
+      },
+      headerContainer: {   
+            paddingHorizontal: 20,
+            paddingVertical: 10,
+          
+      },
+      overView:{
+            color: '#9C9C9C',
+            fontSize:12,
+            marginTop:8
+      }
 
 
 })

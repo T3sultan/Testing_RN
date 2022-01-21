@@ -7,6 +7,8 @@ import {
       YOUTUBE_BASE_URL
       
 } from "../constants/Url";
+import LANGUAGES from "../constants/Languages";
+
 
 
 const TMDB_HTTP_REQUEST = axios.create({
@@ -35,6 +37,8 @@ const getMovieById = (movieId, append_to_response = "") =>
     append_to_response ? { params: { append_to_response } } : null
   );
 
+  const getLanguage = (language_iso) =>
+  LANGUAGES.find((language) => language.iso_639_1 === language_iso);
 
 export {
       getNowPlayingMovies,
@@ -42,5 +46,6 @@ export {
       getPopularMovies,
       getAllGenres,
       getMovieById,
-      getVideo
+      getVideo,
+      getLanguage
 };
