@@ -17,6 +17,8 @@ const TMDB_HTTP_REQUEST = axios.create({
 
 const getNowPlayingMovies = () => TMDB_HTTP_REQUEST.get(ENDPOINTS.NOW_PLAYING_MOVIES);
 
+const getPopularMovies = () =>
+  TMDB_HTTP_REQUEST.get(ENDPOINTS.POPULAR_MOVIES);
 
 const getPoster = (path) => `${TMDB_IMAGE_BASE_URL}/original${path}`;
 
@@ -24,4 +26,5 @@ const getPoster = (path) => `${TMDB_IMAGE_BASE_URL}/original${path}`;
 export {
       getNowPlayingMovies,
       getPoster,
+      getPopularMovies,
 };

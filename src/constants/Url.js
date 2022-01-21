@@ -6,8 +6,8 @@ const TMDB_API_KEY = 'bdb88397a84e36d072c6363aa30b12e4';
 
 const ENDPOINTS = {
       NOW_PLAYING_MOVIES: "/movie/now_playing",
-      UPCOMING_MOVIES: "/movie/upcoming",
-      // POPULAR_MOVIES: "/movie/popular",
+     // UPCOMING_MOVIES: "/movie/upcoming",
+       POPULAR_MOVIES: "/movie/popular",
       // GENRES: "/genre/movie/list",
       // MOVIE: "/movie",
     };

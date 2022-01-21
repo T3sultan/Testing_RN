@@ -14,7 +14,8 @@ import Colors from '../constants/Colors';
 import ItemSeparator from '../components/ItemSeparator';
 import GenreCard from '../components/GenreCard';
 import MovieCardItem from '../components/MovieCardItem';
-import { getNowPlayingMovies } from '../services/MovieService';
+import { getNowPlayingMovies, getPopularMovies } from '../services/MovieService';
+import MoviePopular from '../components/MoviePopular';
 
 
 const genres = ["All", "Action", "Comedy", "Romance", "Horror", "Sci-Fi"];
@@ -22,10 +23,14 @@ const genres = ["All", "Action", "Comedy", "Romance", "Horror", "Sci-Fi"];
 const HomeScreen = () => {
       const [activeGenre, setActiveGenre] = useState("All");
       const [nowPlayingMovies, setNowPlayingMovies] = useState({});
+      const [popularMovies, setPopularMovies] = useState({});
 
       useEffect(() => {
             getNowPlayingMovies().then((movieResponse) =>
                   setNowPlayingMovies(movieResponse.data)
+            );
+            getPopularMovies().then((movieResponse) =>
+                  setPopularMovies(movieResponse.data)
             );
 
       }, []);
@@ -87,6 +92,40 @@ const HomeScreen = () => {
                               )}
                         />
                   </View>
+                  <View style={styles.headerContainer}>
+                        <View>
+                              <Text style={styles.headerTextStyle}>Popular</Text>
+                        </View>
+
+                        <TouchableOpacity style={styles.seeMoreStyle}>
+                              <Text style={styles.textStyleSee}>See more</Text>
+                        </TouchableOpacity>
+
+                  </View>
+                  <View>
+                        <FlatList
+                              data={popularMovies.results}
+                              showsVerticalScrollIndicator={false}
+                              keyExtractor={(item) => item.id.toString()}
+                              ItemSeparatorComponent={() => <ItemSeparator width={20} />}
+                              ListHeaderComponent={() => <ItemSeparator width={20} />}
+                              ListFooterComponent={() => <ItemSeparator width={20} />}
+                              renderItem={({ item }) => (
+                                    <MoviePopular
+                                          title={item.title}
+                                          // language={item.original_language}
+                                          voteAverage={item.vote_average}
+                                          // voteCount={item.vote_count}
+                                          poster={item.poster_path}
+                                          // size={0.6}
+                                          onPress={() => navigation.navigate("movie", { movieId: item.id })}
+
+
+                                    />
+                              )}
+                        />
+                  </View>
+
 
 
 
