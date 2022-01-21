@@ -1,11 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
+import {
+      View,
+      Text,
+      StyleSheet,
+      Image,
+      Dimensions,
+      Linking
+} from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Colors from '../constants/Colors';
-import { getMovieById, getPoster } from '../services/MovieService';
+import { getMovieById, getPoster, getVideo } from '../services/MovieService';
 // import { useEffect } from 'react';
 // import { useState } from 'react';
+import { APPEND_TO_RESPONSE as AR } from "../constants/Url";
 import { Ionicons, Entypo } from '@expo/vector-icons';
 
 const { height, width } = Dimensions.get("window");
@@ -18,10 +26,11 @@ const MovieScreen = ({ route, navigation }) => {
       const [movie, setMovie] = useState({})
 
       useEffect(() => {
-            getMovieById(movieId)
-                  .then(response => setMovie(response.data))
-
-      }, [])
+            getMovieById(
+                  movieId,
+                  `${AR.VIDEOS},${AR.CREDITS},${AR.RECOMMENDATIONS},${AR.SIMILAR}`
+            ).then((response) => setMovie(response?.data));
+      }, []);
 
       return (
             <ScrollView>
@@ -37,7 +46,7 @@ const MovieScreen = ({ route, navigation }) => {
                         />
                   </View>
                   <View style={styles.headerBack}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.goBack()}>
                               <Ionicons name="arrow-back-sharp" size={16} color="white" />
 
                         </TouchableOpacity>
@@ -48,7 +57,7 @@ const MovieScreen = ({ route, navigation }) => {
 
                   </View>
                   <View style={styles.buttonPlayStyle}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={() => Linking.openURL(getVideo(movie.videos.results[0].key))}>
                               <Ionicons name="play-circle-outline" size={45} color="white" />
                         </TouchableOpacity>
                   </View>

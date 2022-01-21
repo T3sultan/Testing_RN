@@ -4,6 +4,8 @@ import {
       TMDB_API_KEY,
       TMDB_IMAGE_BASE_URL,
       ENDPOINTS,
+      YOUTUBE_BASE_URL
+      
 } from "../constants/Url";
 
 
@@ -24,6 +26,8 @@ const getAllGenres = () => TMDB_HTTP_REQUEST.get(ENDPOINTS.GENRES);
 
 
 const getPoster = (path) => `${TMDB_IMAGE_BASE_URL}/original${path}`;
+const getVideo = (key) => `${YOUTUBE_BASE_URL}?v=${key}`;
+
 
 const getMovieById = (movieId, append_to_response = "") =>
   TMDB_HTTP_REQUEST.get(
@@ -37,5 +41,6 @@ export {
       getPoster,
       getPopularMovies,
       getAllGenres,
-      getMovieById
+      getMovieById,
+      getVideo
 };
