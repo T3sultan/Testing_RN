@@ -18,9 +18,9 @@ const MovieCardItem = ({
 
 }) => {
       return (
-            <TouchableOpacity style={styles.mainContainer}>
+            <TouchableOpacity style={styles.mainContainer} onPress={onPress}>
                   <ImageBackground
-                        style={{ ...styles.container, width: 143, height: 212}}
+                        style={{ ...styles.container, width: 143, height: 212 }}
                         imageStyle={{ borderRadius: 12 }}
                         source={{ uri: getPoster(poster) }}
                   >
@@ -73,13 +73,13 @@ const styles = StyleSheet.create({
             color: "#9C9C9C",
       },
 
-      movieTitle:{
-            paddingVertical:2,
-            marginTop:5,
+      movieTitle: {
+            paddingVertical: 2,
+            marginTop: 5,
             width: 143,
-            fontSize:14,
-            color:Colors.black,
-            fontWeight:'bold'
+            fontSize: 14,
+            color: Colors.black,
+            fontWeight: 'bold'
       }
 })
 

@@ -20,7 +20,7 @@ const MoviePopular = ({
 
 }) => {
       return (
-            <TouchableOpacity style={styles.mainContainer}>
+            <TouchableOpacity style={styles.mainContainer} onPress={onPress}>
                   <ImageBackground
                         style={{ ...styles.container }}
                         imageStyle={{ borderRadius: 12 }}
@@ -43,6 +43,10 @@ const MoviePopular = ({
                               </TouchableOpacity>
                               <TouchableOpacity style={styles.genre2}>
                                     <Text style={styles.textStyling}>HORROR</Text>
+
+                              </TouchableOpacity>
+                              <TouchableOpacity style={styles.genre2}>
+                                    <Text style={styles.textStyling}>FANTASY</Text>
 
                               </TouchableOpacity>
 

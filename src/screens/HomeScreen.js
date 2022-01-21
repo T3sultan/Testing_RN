@@ -20,7 +20,7 @@ import MoviePopular from '../components/MoviePopular';
 
 const genres = ["All", "Action", "Comedy", "Romance", "Horror", "Sci-Fi"];
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
       const [activeGenre, setActiveGenre] = useState("All");
       const [nowPlayingMovies, setNowPlayingMovies] = useState({});
       const [popularMovies, setPopularMovies] = useState({});

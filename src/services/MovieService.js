@@ -25,10 +25,17 @@ const getAllGenres = () => TMDB_HTTP_REQUEST.get(ENDPOINTS.GENRES);
 
 const getPoster = (path) => `${TMDB_IMAGE_BASE_URL}/original${path}`;
 
+const getMovieById = (movieId, append_to_response = "") =>
+  TMDB_HTTP_REQUEST.get(
+    `${ENDPOINTS.MOVIE}/${movieId}`,
+    append_to_response ? { params: { append_to_response } } : null
+  );
+
 
 export {
       getNowPlayingMovies,
       getPoster,
       getPopularMovies,
-      getAllGenres
+      getAllGenres,
+      getMovieById
 };
