@@ -36,6 +36,17 @@ const MoviePopular = ({
                               <Text style={styles.textStyleRating}>{voteAverage}/10 IMDb</Text>
 
                         </View>
+                        <View style={styles.genre}>
+                              <TouchableOpacity style={styles.genre1}>
+                                    <Text style={styles.textStyling}>ACTION</Text>
+
+                              </TouchableOpacity>
+                              <TouchableOpacity style={styles.genre2}>
+                                    <Text style={styles.textStyling}>HORROR</Text>
+
+                              </TouchableOpacity>
+
+                        </View>
                         <View style={styles.duration}>
                               <AntDesign name="clockcircleo" size={12} color="black" />
                               <Text style={styles.durationText}>1h 47m</Text>
@@ -55,10 +66,6 @@ const styles = StyleSheet.create({
             height: 128,
             backgroundColor: Colors.active,
             elevation: 3,
-
-
-
-
       },
 
       mainContainer: {
@@ -90,16 +97,39 @@ const styles = StyleSheet.create({
             flexDirection: "row",
             alignItems: "center",
 
+
       },
-      duration:{
+      duration: {
+            flexDirection: "row",
+            alignItems: "center",
+            marginTop: 4
+      },
+      durationText: {
+            fontSize: 12,
+            marginLeft: 4
+      },
+      genre:{
             flexDirection:"row",
-            alignItems:"center",
+            // backgroundColor:'#88A4E8',
+            justifyContent:"space-around"
+           
+         
       },
-      durationText:{
-            fontSize:12,
-            marginLeft:4
+      textStyling:{
+            borderRadius:5,
+            borderColor:"#000",
+            fontSize:8
+      },
+      genre1:{
+            backgroundColor:'#88A4E8',
+            borderRadius:3
+           
+      },
+      genre2:{
+            backgroundColor:'#88A4E8',
+            borderRadius:3
       }
-      
+
 })
 
 export default MoviePopular;

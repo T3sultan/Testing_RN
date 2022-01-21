@@ -20,6 +20,9 @@ const getNowPlayingMovies = () => TMDB_HTTP_REQUEST.get(ENDPOINTS.NOW_PLAYING_MO
 const getPopularMovies = () =>
   TMDB_HTTP_REQUEST.get(ENDPOINTS.POPULAR_MOVIES);
 
+const getAllGenres = () => TMDB_HTTP_REQUEST.get(ENDPOINTS.GENRES);
+
+
 const getPoster = (path) => `${TMDB_IMAGE_BASE_URL}/original${path}`;
 
 
@@ -27,4 +30,5 @@ export {
       getNowPlayingMovies,
       getPoster,
       getPopularMovies,
+      getAllGenres
 };
